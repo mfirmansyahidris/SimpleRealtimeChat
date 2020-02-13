@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/ll_message"
+    android:background="@color/color_3"
+    android:layout_width="wrap_content"
+    android:animateLayoutChanges="true"
+    android:clickable="true"
+    android:foreground="?android:selectableItemBackground"
+    android:layout_margin="@dimen/activity_margin_short"
+    android:padding="@dimen/activity_margin_short"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:textColor="@color/colorWhite"
+        android:id="@+id/tv_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="ini adalah message"/>
+
+    <TextView
+        android:visibility="gone"
+        android:textColor="@color/colorWhite90"
+        android:id="@+id/tv_time"
+        android:layout_marginTop="@dimen/content_margin_medium"
+        android:textSize="@dimen/text_small"
+        android:textStyle="italic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="15' June, 13:00"/>
+
+</LinearLayout>

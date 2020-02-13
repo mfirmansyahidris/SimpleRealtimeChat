@@ -7,4 +7,6 @@
     <!-- MainActivity -->
     <string name="main_anonymous">Anonymous</string>
     <string name="main_subtitle">Click to change</string>
+    <string name="main_chatText">Type chat here</string>
+    <string name="main_help">Chat history appears here</string>
 </resources>
