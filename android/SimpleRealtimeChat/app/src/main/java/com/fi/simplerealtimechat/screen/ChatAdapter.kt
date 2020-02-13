@@ -1,13 +1,9 @@
 package com.fi.simplerealtimechat.screen
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.fi.simplerealtimechat.R
 import com.fi.simplerealtimechat.models.Chat
@@ -21,7 +17,7 @@ created by -fi-
  ****************************************
  */
 
-class ChatAdapter(private val context: Context) : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
+class ChatAdapter : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
     var data = mutableListOf<Chat>()
         set(value) {
             field = value
