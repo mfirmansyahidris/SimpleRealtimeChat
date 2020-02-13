@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#E21B1B</color>
+    <color name="colorPrimaryDark">#B41010</color>
+    <color name="colorAccent">#E21B1B</color>
+    <color name="colorAccentLight">#FF2424</color>
+
+    <!--color-->
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorWhite90">#F0F0F0</color>
+    <color name="colorWhite80">#eceff1</color>
+    <color name="colorWhite70">#CECECE</color>
+    <color name="colorWhite60">#8B8B8B</color>
+    <color name="colorWhite50">#6c6c6c</color>
+    <color name="colorWhite10">#292929</color>
+    <color name="colorWhite20">#505050</color>
+
+    <!--widget-->
+    <color name="colorButton1">#FF2B2B</color>
+    <color name="colorButton2">#FF4F4F</color>
+
+    <color name="colorMapPinRadius">#1A0091EA</color>
+    <color name="colorMapPinRadiusBorder">#330091EA</color>
+
+    <!--Text Color-->
+    <color name="colorTextTitle">#3A3E44</color>
+    <color name="colorTextSubtitle">#8B8B8B</color>
+    <color name="colorTextWhite">#d6d6d6</color>
+    <color name="colorTextAlert">#D50000</color>
+    <color name="colorTextWhiteTransparent90">#E6D6D6D6</color>
 </resources>

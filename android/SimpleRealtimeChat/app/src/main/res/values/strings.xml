@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Simple Realtime Chat</string>
+
+
+    <string name="menu_check">Check</string>
+
+    <!-- MainActivity -->
+    <string name="main_anonymous">Anonymous</string>
+    <string name="main_subtitle">Click to change</string>
 </resources>
