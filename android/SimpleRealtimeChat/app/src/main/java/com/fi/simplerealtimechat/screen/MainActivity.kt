@@ -3,15 +3,20 @@ package com.fi.simplerealtimechat.screen
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.fi.simplerealtimechat.R
 import com.fi.simplerealtimechat.base.BaseActivity
+import com.fi.simplerealtimechat.models.Chat
 import com.fi.simplerealtimechat.utils.PrefManager
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_activity_main.*
 
 class MainActivity : BaseActivity() {
     private var menu: Menu? = null
     private lateinit var menuItem: MenuItem
     private lateinit var prefManager: PrefManager
+
+    private val chatAdapter = ChatAdapter(this)
 
     override fun getLayoutResource(): Int = R.layout.activity_main
 
@@ -28,6 +33,17 @@ class MainActivity : BaseActivity() {
 
         ll_userName.visibility = View.GONE
 
+        rv_chat.adapter = chatAdapter
+
+        val chats = mutableListOf(
+            Chat("Manca", "Haii...", "June 12, 12:00", ContextCompat.getColor(this, R.color.color_0)),
+            Chat("Anonymouse", "hello...", "June 12, 12:00", ContextCompat.getColor(this, R.color.color_3)),
+            Chat("Anna", "Whoaa", "June 12, 12:00", ContextCompat.getColor(this, R.color.color_9)),
+            Chat("Manca", "Where are you guys", "June 12, 12:00", ContextCompat.getColor(this, R.color.color_5)),
+            Chat("Anna", ":)", "June 12, 12:00", ContextCompat.getColor(this, R.color.color_6))
+        )
+
+        chatAdapter.data = chats
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
