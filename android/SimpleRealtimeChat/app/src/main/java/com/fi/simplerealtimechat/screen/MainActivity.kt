@@ -16,7 +16,7 @@ class MainActivity : BaseActivity() {
     private lateinit var menuItem: MenuItem
     private lateinit var prefManager: PrefManager
 
-    private val chatAdapter = ChatAdapter(this)
+    private val chatAdapter = ChatAdapter()
 
     override fun getLayoutResource(): Int = R.layout.activity_main
 
@@ -35,15 +35,6 @@ class MainActivity : BaseActivity() {
 
         rv_chat.adapter = chatAdapter
 
-        val chats = mutableListOf(
-            Chat("Manca", "Haii...", "June 12, 12:00", ContextCompat.getColor(this, R.color.color_0)),
-            Chat("Anonymouse", "hello...", "June 12, 12:00", ContextCompat.getColor(this, R.color.color_3)),
-            Chat("Anna", "Whoaa", "June 12, 12:00", ContextCompat.getColor(this, R.color.color_9)),
-            Chat("Manca", "Where are you guys", "June 12, 12:00", ContextCompat.getColor(this, R.color.color_5)),
-            Chat("Anna", ":)", "June 12, 12:00", ContextCompat.getColor(this, R.color.color_6))
-        )
-
-        chatAdapter.data = chats
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
