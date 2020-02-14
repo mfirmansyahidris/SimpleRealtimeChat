@@ -1,5 +1,8 @@
 package com.fi.simplerealtimechat.models
 
+import com.google.firebase.database.Exclude
+import com.google.firebase.database.IgnoreExtraProperties
+
 /**
  ****************************************
 created by -fi-
@@ -9,9 +12,20 @@ created by -fi-
  ****************************************
  */
 
+@IgnoreExtraProperties
 data class Chat(
-    val from: String? = "",
-    val message: String? = "",
-    val time: String? = "",
-    val color: Int
-)
+    var from: String? = "",
+    var message: String? = "",
+    var time: String? = "",
+    var color: Int? = 0
+){
+    @Exclude
+    fun toMap(): Map<String, Any?>{
+        return mapOf(
+            "from" to from,
+            "message" to message,
+            "time" to time,
+            "color" to color
+        )
+    }
+}

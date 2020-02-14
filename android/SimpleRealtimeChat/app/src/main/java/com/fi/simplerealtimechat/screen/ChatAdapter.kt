@@ -50,8 +50,8 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
             from.text = items.from
             message.text = items.message
             time.text = items.time
-            message.setBackgroundColor(items.color)
-            from.setTextColor(items.color)
+            message.setBackgroundColor(items.color!!)
+            from.setTextColor(items.color!!)
 
             val isExpanded = layoutPosition == mExpandedPosition
             time.visibility = if (isExpanded) View.VISIBLE else View.GONE

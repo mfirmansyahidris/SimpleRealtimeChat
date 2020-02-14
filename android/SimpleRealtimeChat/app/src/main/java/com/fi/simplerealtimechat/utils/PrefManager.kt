@@ -27,10 +27,26 @@ constructor(context: Context) {
         editor.apply()
     }
 
+    private fun setInt(key: String, value: Int) {
+        val editor = sharedPref.edit()
+        editor.putInt(key, value)
+        editor.apply()
+    }
+
     private fun getString(key: String): String? = sharedPref.getString(key, "")
+
+    private fun getInt(key: String): Int? = sharedPref.getInt(key, 0)
 
     fun setName(name: String){
         setString(userName, name)
+    }
+
+    fun setColor(color: Int){
+        setInt(chatColor, color)
+    }
+
+    fun getColor(): Int? {
+        return getInt(chatColor)
     }
 
     fun getName(): String {
@@ -44,5 +60,6 @@ constructor(context: Context) {
     companion object {
         private const val prefName = "SimpleRealtimeChat"
         private const val userName = "userName"
+        private const val chatColor = "chatColor"
     }
 }

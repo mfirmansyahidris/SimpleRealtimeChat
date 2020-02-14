@@ -1,20 +1,29 @@
 package com.fi.simplerealtimechat.screen
 
+import android.annotation.SuppressLint
+import android.os.CountDownTimer
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.core.content.ContextCompat
 import com.fi.simplerealtimechat.R
 import com.fi.simplerealtimechat.base.BaseActivity
 import com.fi.simplerealtimechat.models.Chat
 import com.fi.simplerealtimechat.utils.PrefManager
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_activity_main.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : BaseActivity() {
     private var menu: Menu? = null
     private lateinit var menuItem: MenuItem
     private lateinit var prefManager: PrefManager
+    private val root = FirebaseDatabase.getInstance().reference
 
     private val chatAdapter = ChatAdapter()
 
@@ -27,6 +36,8 @@ class MainActivity : BaseActivity() {
     override fun mainCode() {
         prefManager = PrefManager(this)
 
+        initUserData()
+
         setToolbar()
 
         setHomeButton(false)
@@ -34,6 +45,18 @@ class MainActivity : BaseActivity() {
         ll_userName.visibility = View.GONE
 
         rv_chat.adapter = chatAdapter
+
+        fab_send.setOnClickListener {
+            sendButtonAction(et_chat.text.toString())
+        }
+
+        root.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+
+            override fun onDataChange(p0: DataSnapshot) {
+                onDataChatChange(p0)
+            }
+        })
 
     }
 
@@ -84,13 +107,18 @@ class MainActivity : BaseActivity() {
         setHomeButton(false)
         ll_userName.visibility = View.GONE
 
-        prefManager.setName(userName)
+        if(userName.isNotBlank()){
+            prefManager.setName(userName)
+            prefManager.setColor(getColor())
+        }
 
-        et_userName.setText(getUserName())
+        et_userName.setText(prefManager.getName())
 
-        toolbar?.title = getUserName()
+        toolbar?.title = prefManager.getName()
 
         menuItem.isVisible = false
+
+        setSubtitle()
     }
 
     private fun setHomeButton(state: Boolean) {
@@ -104,21 +132,76 @@ class MainActivity : BaseActivity() {
         toolbar?.title = getToolbarTitle()
         setSupportActionBar(toolbar)
 
-        toolbar?.title = getUserName()
+        toolbar?.title = prefManager.getName()
 
         toolbar?.setOnClickListener {
             setToolbarState()
         }
 
-        toolbar?.subtitle = getString(R.string.main_subtitle)
+        setSubtitle()
     }
 
-    private fun getUserName(): String {
-        return if (prefManager.getName().isBlank()) {
-            getString(R.string.main_anonymous)
-        } else {
-            prefManager.getName()
+    private fun initUserData() {
+        Logger.d(prefManager.getName())
+
+        if (prefManager.getName().isBlank()) {
+            prefManager.setName(getString(R.string.main_anonymous))
         }
+
+        if (prefManager.getColor() == 0) {
+            prefManager.setColor(getColor())
+        }
+    }
+
+    private fun sendButtonAction(message: String) {
+        if(message.isNotBlank()){
+            val chatId = System.currentTimeMillis().toString()
+            val chat = Chat(
+                from = prefManager.getName(),
+                message = message,
+                time = getTime(),
+                color = prefManager.getColor()
+            )
+
+            et_chat.text?.clear()
+            root.child("chats").child(chatId).setValue(chat)
+        }
+    }
+
+    private fun getColor(): Int {
+        val colors = resources.getIntArray(R.array.colors_palette)
+        return colors[(colors.indices).random()]
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private fun getTime(): String? {
+        val sdf = SimpleDateFormat("dd MMM y, hh:mm")
+        return sdf.format(Date())
+    }
+
+    private fun onDataChatChange(p0: DataSnapshot) {
+        val children = p0.child("chats").children.iterator()
+        val chats = mutableListOf<Chat>()
+        while (children.hasNext()) {
+            val chat = (children.next() as DataSnapshot).getValue(Chat::class.java)
+            chat?.let {
+                chats.add(it)
+            }
+        }
+
+        chatAdapter.data = chats
+        rv_chat.scrollToPosition(chats.size - 1)
+    }
+
+    private fun setSubtitle(){
+        toolbar?.subtitle = getString(R.string.main_subtitle)
+        object : CountDownTimer(3000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {}
+
+            override fun onFinish() {
+                toolbar?.subtitle = null
+            }
+        }.start()
     }
 
 }
