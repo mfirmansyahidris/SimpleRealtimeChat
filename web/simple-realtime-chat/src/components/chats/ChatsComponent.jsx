@@ -7,8 +7,9 @@ class ChatComponent extends Component{
             <div className="incoming_msg">
                 <div className="received_msg">
                 <div className="received_withd_msg">
-                    <p>Test which is a new approach to have all solutions</p>
-                    <span className="time_date">11:01 AM    |    June 9</span>
+                    <span className="sender_msg">{this.props.sender}</span>
+                    <p>{this.props.message}</p>
+                    <span className="time_date">{this.props.time}</span>
                 </div>
                 </div>
             </div>

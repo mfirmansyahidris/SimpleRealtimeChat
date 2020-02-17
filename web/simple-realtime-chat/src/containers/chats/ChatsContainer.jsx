@@ -7,10 +7,22 @@ class ChatsContainer extends Component{
         return(
           <div className="msg_history">
 
-            <ChatComponent />
-            <ChatComponent />
-            <ChatComponent />
-            <ChatComponent />
+            <ChatComponent
+              sender="Ali"
+              message="Haii.."
+              time="10:30"
+            />
+            <ChatComponent
+              sender="Bambang"
+              message="Ali selalu kencing berdiri"
+              time="10:30"
+            />
+            <ChatComponent
+              sender="Ali"
+              message="Bahwa sesungguhnya kemerdekaan itu ialah hak segala bangsa dan oleh sebab itu maka penjajahan di atas dunia harus dihapuskan"
+              time="10:30"
+            
+            />
             
           </div>
         )
