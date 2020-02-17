@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import userImagePlaceHolder from '../../img/user-profile.png'
+import './ChatsComponent.css'
 
-class ChatIncomingComponent extends Component{
+class ChatComponent extends Component{
     render(){
         return(
             <div className="incoming_msg">
-                <div className="incoming_msg_img"><img src={userImagePlaceHolder} alt="alibambang" /></div>
                 <div className="received_msg">
                 <div className="received_withd_msg">
                     <p>Test which is a new approach to have all solutions</p>
@@ -17,4 +16,4 @@ class ChatIncomingComponent extends Component{
     }
 }
 
-export default ChatIncomingComponent
+export default ChatComponent

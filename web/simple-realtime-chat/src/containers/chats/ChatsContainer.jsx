@@ -1,19 +1,16 @@
 import React, { Component } from "react";
-import ChatIncomingComponent from "../../components/chats/ChatsIncomingComponent";
-import ChatOutgoingComponent from "../../components/chats/ChatOutgoingComponent";
+import ChatComponent from "../../components/chats/ChatsComponent";
+import './ChatsContainer.css'
 
 class ChatsContainer extends Component{
     render(){
         return(
           <div className="msg_history">
-                
-            <ChatIncomingComponent />
 
-            <ChatOutgoingComponent />
-
-            <ChatIncomingComponent />
-
-            <ChatOutgoingComponent />
+            <ChatComponent />
+            <ChatComponent />
+            <ChatComponent />
+            <ChatComponent />
             
           </div>
         )
