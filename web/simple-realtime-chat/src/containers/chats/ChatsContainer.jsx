@@ -1,29 +1,59 @@
 import React, { Component } from "react";
 import ChatComponent from "../../components/chats/ChatsComponent";
 import './ChatsContainer.css'
+import FirebaseInit from '../../config/FirebaseInit'
 
 class ChatsContainer extends Component {
+  state = {
+    chats: []
+  }
+
+  componentDidMount(){
+    this.getChats()
+  }
+
+  componentDidUpdate(){
+    this.scrollToBottom();
+  }
+
+  getChats = () => {
+    let ref = FirebaseInit.database().ref('/chats')
+    ref.on('value', snapshot => {
+      let chats = snapshot.val()
+      let newState = []
+      for(let chat in chats){
+        newState.push({
+          id: chat,
+          color: chats[chat].color,
+          from: chats[chat].from,
+          message: chats[chat].message,
+          time: chats[chat].time
+        })
+      }
+
+      this.setState({
+        chats: newState
+      })
+    })
+  }
+
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" })
+  }
+
   render() {
     return (
-      <div className="msg_history">
-
-        <ChatComponent
-          sender="Ali"
-          message="Haii.."
-          time="10:30"
-        />
-        <ChatComponent
-          sender="Bambang"
-          message="Ali selalu kencing berdiri"
-          time="10:30"
-        />
-        <ChatComponent
-          sender="Ali"
-          message="Bahwa sesungguhnya kemerdekaan itu ialah hak segala bangsa dan oleh sebab itu maka penjajahan di atas dunia harus dihapuskan"
-          time="10:30"
-
-        />
-
+      <div className="msg_history" >
+        {
+          this.state.chats.map(chat => (
+            <ChatComponent
+              sender = {chat.from}
+              message = {chat.message}
+              time = {chat.time}
+            />
+          ))
+        }
+        <div ref={(el) => { this.messagesEnd = el }}/>
       </div>
     )
   }
