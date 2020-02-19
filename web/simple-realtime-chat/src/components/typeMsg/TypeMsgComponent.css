@@ -1,0 +1,61 @@
+.type_msg {
+  border-top: 1px solid #c4c4c4;
+}
+
+.input_msg_write input {
+  color: #4c4c4c;
+  font-size: 15px;
+  min-height: 48px;
+  padding: 20px;
+  width: 100%;
+  margin: 0px 20px 20px 0px;
+}
+
+.new_user_name{
+  color: #4c4c4c;
+  font-size: 15px;
+  min-height: 48px;
+  padding: 20px;
+  width: 100%;
+  margin: 0px 20px 20px 0px;
+}
+
+.input_msg_write{
+  display: flex;
+}
+
+.msg_send_btn {
+  background: #05728f none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 17px;
+  height: 33px;
+  right: 0;
+  top: 11px;
+  width: 33px;
+  margin: auto;
+}
+
+.user_name{
+  display: flex;
+}
+
+.user_name_edit_btn{
+  background: #9d9d9d none repeat scroll 0 0;
+  border: medium none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  height: 25px;
+  right: 0;
+  top: 11px;
+  width: 25px;
+  margin-left: 10px;
+}
+
+.user_name{
+  margin: 20px 20px 0px 0px;
+}
