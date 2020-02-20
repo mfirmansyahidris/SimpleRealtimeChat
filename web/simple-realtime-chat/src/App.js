@@ -21,6 +21,12 @@ class App extends Component{
     })
   }
 
+  componentDidUpdate(){
+    this.saveUserData()
+  }
+
+  saveUserData = () => localStorage.setItem('userName', this.state.userName)
+  
   render(){
     return (
       <div className="App">

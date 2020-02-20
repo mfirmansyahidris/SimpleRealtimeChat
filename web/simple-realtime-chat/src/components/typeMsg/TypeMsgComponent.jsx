@@ -9,7 +9,7 @@ class TypeMsgComponent extends Component{
         super(props)
 
         this.state = {
-            userName: '',
+            userName: 'Anonymouse',
             userNameDialogShow: false,
         }
     }
@@ -24,11 +24,19 @@ class TypeMsgComponent extends Component{
         this.handelUserNameDialogClose()
         this.props.onUserNameChange(this.state.userName)
     }
+
+    componentDidMount(){
+        let newUserName = localStorage.getItem('userName')
+        if(newUserName !== null){
+            this.setState({ userName: newUserName })
+        }
+    }
+
     render(){
         return(
             <div className="type_msg">           
                 <div className="user_name">
-                    <h6>Anonymouse</h6>
+                    <h6>{this.state.userName}</h6>
                     <button 
                         onClick={this.handleUserNameDialogShow} 
                         className="user_name_edit_btn" 
