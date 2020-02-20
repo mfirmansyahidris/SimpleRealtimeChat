@@ -3,33 +3,44 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane, faPen } from '@fortawesome/free-solid-svg-icons'
 import './TypeMsgComponent.css'
 import { Modal, Button } from "react-bootstrap";
+import { colorRand } from '../../config/Colors'
 
 class TypeMsgComponent extends Component{
     constructor(props){
         super(props)
 
         this.state = {
-            userName: 'Anonymouse',
+            userName: props.userName,
+            color: props.color,
             userNameDialogShow: false,
+
+            newUserName: props.userName,
+            newColor: ''
         }
     }
-
-    handelUserNameDialogClose = () => this.setState({userNameDialogShow: false})
 
     handleUserNameDialogShow = () => this.setState({userNameDialogShow: true})
 
-    handleUserNameChange = (e) => this.setState({userName: e.target.value})
+    handleUserNameChange = (e) => this.setState({newUserName: e.target.value})
+
+    handelUserNameDialogClose = () => {
+        this.setState({userNameDialogShow: false})
+    }
 
     handleSaveUserNameButton = () => {
+        let color = colorRand
         this.handelUserNameDialogClose()
-        this.props.onUserNameChange(this.state.userName)
+        this.props.onUserNameChange(this.state.newUserName, color)
+        this.setState({
+            userName : this.state.newUserName,
+            color : color
+        })
     }
 
     componentDidMount(){
-        let newUserName = localStorage.getItem('userName')
-        if(newUserName !== null){
-            this.setState({ userName: newUserName })
-        }
+        this.setState({
+            userName: this.state.userName
+        })
     }
 
     render(){
@@ -38,6 +49,7 @@ class TypeMsgComponent extends Component{
                 <div className="user_name">
                     <h6>{this.state.userName}</h6>
                     <button 
+                        style={{background: this.state.color}}
                         onClick={this.handleUserNameDialogShow} 
                         className="user_name_edit_btn" 
                         type="button">
@@ -56,7 +68,7 @@ class TypeMsgComponent extends Component{
                     <Modal.Body>
                         <input 
                             type="text" 
-                            value={this.state.userName} 
+                            value={this.state.newUserName} 
                             onChange={this.handleUserNameChange} 
                             className="new_user_name" 
                             placeholder="Set Awesome User Name"

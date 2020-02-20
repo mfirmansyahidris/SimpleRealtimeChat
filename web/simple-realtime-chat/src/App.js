@@ -1,32 +1,43 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap'
 import './App.css'
-import ChatsContainer from './containers/chats/ChatsContainer';
-import TypeMsgComponent from './components/typeMsg/TypeMsgComponent';
-
+import ChatsContainer from './containers/chats/ChatsContainer'
+import TypeMsgComponent from './components/typeMsg/TypeMsgComponent'
+import { colorRand } from './config/Colors'
 
 class App extends Component{
   constructor(props){
     super(props)
 
     this.state = {
-      userName: ''
+      userName: localStorage.getItem('userName') === null ? 'Anonymouse' : localStorage.getItem('userName'),
+      color: localStorage.getItem('color') === null ? colorRand : localStorage.getItem('color')
     }
   }
-
-  handleUserNameChange = (newUserName) => {
+  
+  handleUserNameChange = (newUserName, newColor) => {
     this.setState({
-      userName: newUserName
+      userName: newUserName,
+      color: newColor
     })
   }
 
-  componentDidUpdate(){
-    this.saveUserData()
+  saveUser = () => {
+    localStorage.setItem('userName', this.state.userName)
+    localStorage.setItem('color', this.state.color)
   }
 
-  saveUserData = () => localStorage.setItem('userName', this.state.userName)
-  
+  componentDidMount(){
+    if(localStorage.getItem('userName') === null){
+      this.saveUser()
+    }
+  }
+
+  componentDidUpdate(){
+    this.saveUser()
+  }
+
   render(){
     return (
       <div className="App">
@@ -35,10 +46,14 @@ class App extends Component{
           <div className="messaging">
             <div className="inbox_msg">  
               <div className="mesgs">
-  
+
                 <ChatsContainer />
   
-                <TypeMsgComponent onUserNameChange={this.handleUserNameChange} />
+                <TypeMsgComponent 
+                  onUserNameChange={this.handleUserNameChange} 
+                  userName={this.state.userName}
+                  color={this.state.color} 
+                />
   
               </div>
               
