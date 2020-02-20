@@ -148,7 +148,7 @@ class MainActivity : BaseActivity() {
             prefManager.setName(getString(R.string.main_anonymous))
         }
 
-        if (prefManager.getColor() == 0) {
+        if (prefManager.getColor().isNullOrBlank()) {
             prefManager.setColor(getColor())
         }
     }
@@ -168,8 +168,9 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    private fun getColor(): Int {
-        val colors = resources.getIntArray(R.array.colors_palette)
+    private fun getColor(): String {
+        val colors = resources.getStringArray(R.array.colors_palette)
+        Logger.d(colors)
         return colors[(colors.indices).random()]
     }
 

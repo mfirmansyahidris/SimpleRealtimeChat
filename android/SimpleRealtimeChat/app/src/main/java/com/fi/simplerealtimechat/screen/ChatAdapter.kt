@@ -1,5 +1,6 @@
 package com.fi.simplerealtimechat.screen
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,8 +51,8 @@ class ChatAdapter : RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
             from.text = items.from
             message.text = items.message
             time.text = items.time
-            message.setBackgroundColor(items.color!!)
-            from.setTextColor(items.color!!)
+            message.setBackgroundColor(Color.parseColor(items.color!!))
+            from.setTextColor(Color.parseColor(items.color!!))
 
             val isExpanded = layoutPosition == mExpandedPosition
             time.visibility = if (isExpanded) View.VISIBLE else View.GONE

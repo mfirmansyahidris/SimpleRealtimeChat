@@ -17,7 +17,7 @@ data class Chat(
     var from: String? = "",
     var message: String? = "",
     var time: String? = "",
-    var color: Int? = 0
+    var color: String? = ""
 ){
     @Exclude
     fun toMap(): Map<String, Any?>{
