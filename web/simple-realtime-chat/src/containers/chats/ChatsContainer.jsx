@@ -50,6 +50,7 @@ class ChatsContainer extends Component {
               sender = {chat.from}
               message = {chat.message}
               time = {chat.time}
+              color = {chat.color}
             />
           ))
         }
