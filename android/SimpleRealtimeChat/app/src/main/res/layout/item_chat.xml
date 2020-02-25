@@ -15,7 +15,6 @@
         tools:text="name"
         android:layout_marginBottom="@dimen/content_margin_normal"
         android:elevation="@dimen/activity_elevation_normal"
-        android:textColor="@color/color_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -34,7 +33,6 @@
             android:clickable="true"
             android:foreground="?android:selectableItemBackground"
             android:padding="@dimen/activity_margin_short"
-            android:background="@color/color_3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="sindaosnoadnso"/>
